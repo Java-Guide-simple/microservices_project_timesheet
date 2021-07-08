@@ -151,5 +151,55 @@ public class TimeSheetController {
 
     }
 
+    // Displaying all Filled Timesheet
+    @ApiOperation(value = "Fetch All TimeSheet",
+            response = TimeSheet.class, tags = "DISPLAYING FILLED TIMESHEET")
+    @GetMapping("/get-all")
+    public  List<TimeSheet> showAllTimeSheet(){
+        List<TimeSheet> allTimeSheets = timeSheetService.showAllTimeSheet();
+        return allTimeSheets;
+    }
+
+
+
+    // Displaying all Filled Timesheet By One Employee
+    @ApiOperation(value = "Fetch All TimeSheet For One Employee",
+            response = TimeSheet.class, tags = "DISPLAYING FILLED TIMESHEET")
+    @GetMapping("/get-one/{eid}")
+    public List<TimeSheet> getTimeSheetByEmployeeId(@PathVariable Integer eid){
+       return timeSheetService.showTimeSheetByEmployeeId(eid);
+    }
+
+
+
+    // Fetch TimeSheets Between two Dates For all Employee , one project
+
+    @ApiOperation(value = "Fetch TimeSheets Between two Dates For all Employee , one project ",
+            response = TimeSheet.class, tags = "DISPLAYING FILLED TIMESHEET")
+
+
+    @GetMapping("/{pid}/{startDate}/{endDate}")
+    public List<TimeSheet> getTimeSheetByPid(@PathVariable Integer pid,@PathVariable String startDate,@PathVariable String endDate) {
+        log.info("Inside TimeSheetController#getTimeSheetByPid Method");
+        LocalDate startDate1 = LocalDate.parse(startDate);
+        LocalDate endDate1 = LocalDate.parse(endDate);
+
+        return timeSheetService.getTimeSheetByPid(pid, startDate1, endDate1);
+    }
+
+
+    // Fetch TimeSheets Between two Dates For all Employee
+
+    @ApiOperation(value = "Fetch TimeSheets Between two Dates For all Employee  ",
+            response = TimeSheet.class, tags = "DISPLAYING FILLED TIMESHEET")
+
+
+    @GetMapping("/{startDate}/{endDate}")
+    public List<TimeSheet> getTimeSheetsBetweenTwoDateForAllEmp(@PathVariable String startDate,@PathVariable String endDate) {
+        log.info("Inside TimeSheetController#getTimeSheetsBetweenTwoDateForAllEmp Method");
+        LocalDate startDate1 = LocalDate.parse(startDate);
+        LocalDate endDate1 = LocalDate.parse(endDate);
+        return timeSheetService.getTimeSheetsBetweenTwoDateForAllEmp(startDate1, endDate1);
+    }
 
 }

@@ -24,4 +24,19 @@ public interface TimeSheetRepository extends JpaRepository<TimeSheet, Integer> {
     // Fetch TimeSheets Between two Dates For Single Employee
     @Query(value = "select t from TimeSheet t where t.employeeId=?1 and t.date between ?2 and ?3")
     public List<TimeSheet> getTimeSheet(Integer eid, LocalDate startDate, LocalDate endDate);
+
+    //Fetch All TimeSheet  Single Employee
+    @Query(value = "select t from TimeSheet t where t.employeeId=?1 ")
+    public List<TimeSheet> getTimeSheetByEmployeeId(Integer eid);
+
+
+    // Fetch TimeSheets Between two Dates For All Employee and single Project
+    @Query(value = "select t from TimeSheet t where t.projectId=?1 and t.date between ?2 and ?3")
+    public List<TimeSheet> getTimeSheetByPid( Integer pid, LocalDate startDate, LocalDate endDate);
+
+    // Fetch TimeSheets Between two Dates For All Employee
+    @Query(value = "select t from TimeSheet t where t.date between ?1 and ?2")
+    public List<TimeSheet> getTimeSheets(LocalDate startDate, LocalDate endDate);
+
+
 }

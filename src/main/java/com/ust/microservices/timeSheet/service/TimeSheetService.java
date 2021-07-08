@@ -105,5 +105,29 @@ public class TimeSheetService {
 
     }
 
+    // Displaying All Filled timesheet
+    public List<TimeSheet> showAllTimeSheet(){
+        log.info("Inside TimeSheetService#ShowAllTimeSheet() Method");
+        List<TimeSheet> allTimeSheet = timeSheetRepository.findAll();
+        return allTimeSheet;
+    }
 
+    // Displaying All Filled timesheet By one Employee
+    public List<TimeSheet> showTimeSheetByEmployeeId(Integer eid){
+        log.info("Inside TimeSheetService#showTimeSheetByEmployeeId Method");
+       return timeSheetRepository.getTimeSheetByEmployeeId(eid);
+    }
+
+
+    // Fetch TimeSheets Between two Dates For all Employee , one project
+    public List<TimeSheet> getTimeSheetByPid(Integer pid, LocalDate startDate, LocalDate endDate) {
+        log.info("Inside TimeSheetService#getTimeSheetByPid Method");
+        return timeSheetRepository.getTimeSheetByPid(pid, startDate, endDate);
+    }
+
+    // Fetch TimeSheets Between two Dates For all Employee
+    public List<TimeSheet> getTimeSheetsBetweenTwoDateForAllEmp(LocalDate startDate, LocalDate endDate) {
+        log.info("Inside TimeSheetService#getTimeSheetByPid Method");
+        return timeSheetRepository.getTimeSheets(startDate, endDate);
+    }
 }
